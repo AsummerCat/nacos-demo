@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      ## 注册中心地址
+      server-addr: 127.0.0.1:8848
+      discovery:
+        ## 分组
+          group: test
+      config:
+        ## config默认是跟注册注册中心的路径一样 也可以单独配置
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        group: test
+        ## 共享配置 方式1
+        shared-configs: common.yaml,redis.yaml
+        ## 配置自动刷新
+        refreshable-dataids: common.yaml,redis.yaml
+
+
+        ## 共享配置 方式2
+        extension-configs:
+          - data-id: greeting.yaml
+            group: common
+            refresh: true
+          - data-id: author.yaml
+            group: common
+            refresh: false
+ ## 三种方式优先级方式
+ ## 默认规则  >  ext-config[n]  >  shared-dataids
+
+          # config的命名空间
+        namespace: 3cae6ccb-b651-4a35-ae69-c9d91430610d
+
